@@ -1,0 +1,6 @@
+[gd_resource type="SyntaxHighlighter" load_steps=2 format=3 uid="uid://p425r8b8aeth"]
+
+[sub_resource type="GDScript" id="GDScript_1qker"]
+
+[resource]
+script = SubResource("GDScript_1qker")

@@ -1,0 +1,72 @@
+[gd_scene load_steps=3 format=3 uid="uid://djdtgpbm8p32m"]
+
+[ext_resource type="Script" path="res://addons/External Text Editor Window/ScriptEditorScene.gd" id="1_8pr83"]
+[ext_resource type="SyntaxHighlighter" uid="uid://p425r8b8aeth" path="res://new_syntax_highlighter.tres" id="3_yhggv"]
+
+[node name="ScriptEditor" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8pr83")
+tabsize = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="MenuButton" type="MenuButton" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Options"
+flat = false
+item_count = 4
+popup/item_0/text = "Load"
+popup/item_0/id = 0
+popup/item_1/text = "Save"
+popup/item_1/id = 1
+popup/item_2/text = "save as"
+popup/item_2/id = 2
+popup/item_3/text = "close"
+popup/item_3/id = 3
+
+[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="TextEdit" type="TextEdit" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+highlight_all_occurrences = true
+highlight_current_line = true
+draw_tabs = true
+syntax_highlighter = ExtResource("3_yhggv")
+minimap_draw = true
+
+[node name="FileDialog" type="FileDialog" parent="."]
+initial_position = 1
+title = ""
+size = Vector2i(770, 456)
+
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
+position = Vector2i(52, 498)
+
+[connection signal="button_down" from="VBoxContainer/HBoxContainer/Button" to="." method="_on_button_button_down"]
+[connection signal="file_selected" from="FileDialog" to="." method="_on_open_file_file_selected"]
+[connection signal="confirmed" from="ConfirmationDialog" to="." method="_on_confirmation_dialog_confirmed"]
